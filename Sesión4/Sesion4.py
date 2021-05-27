@@ -1,4 +1,4 @@
-#Condicionales anidados y caso elif
+#Condicionales múltiples caso elif
 
 #Crear una calculadora con las operaciones básicas
 
@@ -7,21 +7,21 @@ print("[2] Resta")
 print("[3] Multiplicación")
 print("[4] División")
 
-operación = int(input("Dígite su opción [1-4]: "))
+operacion = int(input("Dígite su opción [1-4]: "))
 
 num1= int(input("numero 1: "))
 num2= int(input("numero 2: "))
 
-if (operación == 1):
+if (operacion == 1):
     total = num1 + num2
     print (f"{num1} + {num2} = {total}")
-elif operación == 2:
+elif operacion == 2:
     total = num1 - num2
     print (f"{num1} - {num2} = {total}")
-elif operación == 3:
+elif operacion == 3:
     total = num1 * num2
     print (f"{num1} * {num2} = {total}")
-elif operación == 4:
+elif operacion == 4:
     total = num1 / num2
     print (f"{num1} / {num2} = {total}")
 else:
