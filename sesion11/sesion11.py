@@ -105,10 +105,13 @@ def primos(lista):
     primos = []
     for i in lista:
         esPrimo = True
+        if i == 1:
+            esPrimo == False
         for j in range (2,i):
             if i % j == 0:
                 esPrimo = False
                 break
+
         if esPrimo:
             primos.append(i)
     return primos
