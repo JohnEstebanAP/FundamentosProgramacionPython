@@ -81,4 +81,36 @@ actividad1()
 #    mayor(x) - Una función que imprima el número mayor valor de una lista x
 #    primos(x) - Una función que imprima los números de la lista que son números primos
 
-#actividad2()
+import random
+
+def actividad2():
+    print("Entró en la Actividad 2")
+    lista = []
+    for i in range(6):
+        num = random.randint(1,20)
+        lista.append(num)
+    print(f"La nueva lista: {lista}")
+
+    print("El número mayor es: ",mayor(lista))
+    print("Los números primos son: ",primos(lista))
+
+def mayor(lista):
+    num = lista[0]
+    for i in lista:
+        if num <= i:
+            num = i
+    return num
+
+def primos(lista):
+    primos = []
+    for i in lista:
+        esPrimo = True
+        for j in range (2,i):
+            if i % j == 0:
+                esPrimo = False
+                break
+        if esPrimo:
+            primos.append(i)
+    return primos
+
+actividad2()
