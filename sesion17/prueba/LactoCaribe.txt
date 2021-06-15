@@ -1,0 +1,112 @@
+Algoritmo LactoCaribeLTDA
+	Dimension puntosDistribucion[10], camiones[5], matrizAsignacion[10,4], matrizRegistro[10,4], a[2]
+	llenarPuntosDistribucion(puntosDistribucion)
+	llenarCamiones(camiones)
+	llenarMatrizAsignacion(matrizAsignacion)
+	llenarMatrizRegistro(matrizRegistro)
+	p <- "P3"; c <- "C3"
+	
+	ubi <- buscarMatriz(matrizAsignacion,p,c)
+	
+	Si (ubi <> -1) Entonces
+		Escribir "Punto Distribución: ", matrizAsignacion[ubi,1], " Camión: ", matrizAsignacion[ubi,2], " Tiempo Despacho Asignado: ", matrizAsignacion[ubi,3], " Listros asignados: ", matrizAsignacion[ubi,4]
+	FinSi
+	
+	ubi <- buscarMatriz(matrizRegistro,p,c)
+	
+	Si (ubi <> -1) Entonces
+		Escribir "Punto Distribución: ", matrizRegistro[ubi,1], " Camión: ", matrizRegistro[ubi,2], " Tiempo Despacho Registrado: ", matrizRegistro[ubi,3], " Listros despachados: ", matrizRegistro[ubi,4]
+	FinSi
+	
+	eTD <- eficienciaTiemposDespachos(matrizAsignacion,matrizRegistro, p, c)
+	Escribir "Eficiencia en tiempos de despacho del punto de distribución ",p, " y el camión ", c, " es igual a ", eTD
+	
+	nCD <- nivelCumplimientoDespachos(matrizAsignacion,matrizRegistro, p, c)
+	Escribir "Nivel de cumplimiento del punto de distribución ",p, " y el camión ", c, " es igual a ", nCD
+	
+FinAlgoritmo
+
+// funcion que recibe un argumento por referencia, y lo modifica
+Funcion llenarPuntosDistribucion(pD por referencia) 
+	pD[1] <- "P1"
+	pD[2] <- "P2"
+	pD[3] <- "P3"
+	pD[4] <- "P4"
+	pD[5] <- "P5"
+	pD[6] <- "P6"
+	pD[7] <- "P7"
+	pD[8] <- "P8"
+	pD[9] <- "P9"
+	pD[10] <- "P10"
+FinFuncion
+
+// funcion que recibe un argumento por referencia, y lo modifica
+Funcion llenarCamiones(c por referencia) 
+	c[1] <- "C1"
+	c[2] <- "c2"
+	c[3] <- "c3"
+	c[4] <- "c4"
+	c[5] <- "c5"
+FinFuncion
+
+// funcion que recibe un argumento por referencia, y lo modifica
+Funcion llenarMatrizAsignacion(mA por referencia)
+	mA[1,1] <- "P1"; mA[1,2] <- "C1"; mA[1,3] <- "7"; mA[1,4] <- "100"
+	mA[2,1] <- "P2"; mA[2,2] <- "C2"; mA[2,3] <- "7"; mA[2,4] <- "100"
+	mA[3,1] <- "P3"; mA[3,2] <- "C3"; mA[3,3] <- "7"; mA[3,4] <- "100"
+FinFuncion
+
+// funcion que recibe un argumento por referencia, y lo modifica
+Funcion llenarMatrizRegistro(mR por referencia)
+	mR[1,1] <- "P1"; mR[1,2] <- "C1"; mR[1,3] <- "7"; mR[1,4] <- "100"
+	mR[2,1] <- "P2"; mR[2,2] <- "C2"; mR[2,3] <- "8"; mR[2,4] <- "50"
+	mR[3,1] <- "P3"; mR[3,2] <- "C3"; mR[3,3] <- "6"; mR[3,4] <- "100"
+FinFuncion	
+
+// funcion que recibe un argumento por valor, y devuelve 
+Funcion res <- buscarMatriz(m, p, c) 	
+	res <- -1
+	i <- 1; continuar = Verdadero
+	Mientras i <= 10 y continuar = Verdadero Hacer
+		Si m[i,1] = p y m[i,2] = c Entonces
+			res <- i
+			continuar <- Falso
+		Fin Si
+		i <- i + 1
+	Fin Mientras
+	//res <-  // retorna
+FinFuncion
+
+// funcion que recibe un argumento por valor, y devuelve 
+Funcion res <- eficienciaTiemposDespachos(mA, mR, p, c) 	
+	res <- -1
+	uMA <- buscarMatriz(mA, p, c)
+	uMR <- buscarMatriz(mR, p, c)
+	Si uMA = -1 Entonces
+		Escribir "No existe información en la Matriz de Asignación para el punto de distribución ", p, " y camión ", c,"."
+	SiNo
+		Si uMR = -1 Entonces
+			Escribir "No existe información en la Matriz de Registro para el punto de distribución ", p, " y camión ", c,"."
+		SiNo			
+			res <- ( ConvertirANumero( mA[uMA,3] ) - ConvertirANumero( mR[uMR,3] ) )/ ConvertirANumero( mA[uMA,3] ) * 100
+		Fin Si
+	Fin Si
+	//res <-  // retorna
+FinFuncion
+
+// funcion que recibe un argumento por valor, y devuelve 
+Funcion res <- nivelCumplimientoDespachos(mA, mR, p, c) 	
+	res <- -1
+	uMA <- buscarMatriz(mA, p, c)
+	uMR <- buscarMatriz(mR, p, c)
+	Si uMA = -1 Entonces
+		Escribir "No existe información en la Matriz de Asignación para el punto de distribución ", p, " y camión ", c,"."
+	SiNo
+		Si uMR = -1 Entonces
+			Escribir "No existe información en la Matriz de Registro para el punto de distribución ", p, " y camión ", c,"."
+		SiNo			
+			res <- ConvertirANumero(mR[uMR,4]) / ConvertirANumero(mA[uMA,4]) * 100 
+		Fin Si
+	Fin Si
+	//res <-  // retorna
+FinFuncion
