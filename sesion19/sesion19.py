@@ -33,6 +33,29 @@ ejemplo2()
 # Actividad 1
 #
 # Vamos a elaborar un algoritmo que permita ingresar un número entero (1 a 10), y muestre su equivalente en romano usando un diccionario como lo definimos anteriormente. 
+def numerosRomanos():
+    
+    while True:       
+        try:        
+            dato= input("Por favor ingrese un numero \ndel 1 al 10 para determinar su numero romano\n: ")
+            numRomanos = {
+                "1":"I",
+                "2":"II",
+                "3":"III",
+                "4":"IV",
+                "5":"V",
+                "6":"VI",
+                "7":"VII",
+                "8":"VII",
+                "9":"IX",
+                "10":"X"
+            }
+            print(f"el numero {dato} en numero romanos es ",numRomanos[dato])
+            break
+        except KeyError:
+            print("El numero ingresado no es un numero en el rango del 1-10")        
+
+
 
 
 #Actividad 2 
@@ -47,3 +70,32 @@ ejemplo2()
 #       e. Que después de llamar a guardaProducto le pregunte al usuario si tiene o no más artículos a ingresar. Si no tiene, el programa debe detenerse.
 #    Al final de tus funciones, puedes simplemente llamar a la función caja para probar
 
+from io import open_code
+def guardarProducto(nombre, precio):
+    miArchivo = open("recibo.txt","a")
+    miArchivo.write(f"{nombre},{precio}\n")
+    miArchivo.close()  
+
+def caja():
+    continuar = True
+    while continuar:
+        nomProducto = input("Escriba el nombre del producto: ")
+        valProducto = int(input(f"Digite el valor del {nomProducto}: "))
+
+        guardarProducto(nomProducto, valProducto)
+
+        continuar = input("¿Dese agregar más productos [S/N]?: ").upper()#lo pasa todo al mayúsculas
+        if continuar != "S":
+            continuar = False
+        else:
+            continuar = True
+
+def activadad2():
+    print("Actividad 2:\n")
+    caja()
+
+
+
+if __name__ == "__main__":
+    #numerosRomanos()
+    activadad2()

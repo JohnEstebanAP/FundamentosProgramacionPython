@@ -1,0 +1,3 @@
+arroz,2500
+panela,1500
+leche,2500
