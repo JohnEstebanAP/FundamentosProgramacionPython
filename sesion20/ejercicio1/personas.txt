@@ -1,0 +1,4 @@
+1;Carlos;Peréz;05/01/1909
+2;Manuel;Medina;26/06/1973
+3;Rosa;Campos;20/06/1961
+4;David;Garcia;25/07/2006
